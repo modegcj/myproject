@@ -12,6 +12,34 @@
     <!-- built files will be auto injected -->
   </body>
   <script>
-      
+    // var promise = new Promise(function(resolve,reject){
+    //   var flag = Math.random();
+    //   setTimeout(function(){
+    //     if(flag){
+    //       resolve('success');
+    //     }else{
+    //       reject('fail')
+    //     }
+    //   },1000);
+    // });
+    // console.log(promise);
+    // promise.then(function(result){
+    //   console.log(result);
+    // },function(err){
+    //   console.log(err);
+    // })
+    let promise = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        var success = '成功',fail = '失败';
+        Math.random() > 0.5 ? resolve(success) : reject(fail);
+      },1000)
+    });
+    console.log(promise);
+    promise.then((result) => {
+      console.log(result);
+    },(err) => {
+      console.log(err);
+    });
+    console.log(parseInt(Math.random()*10));
   </script>
 </html>
