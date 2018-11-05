@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>canvas</title>
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas1"></canvas>
+    </body>
+    <script>
+        var canvas1 = document.getElementById("canvas1"),
+            WIDTH = document.documentElement.clientWidth,
+            HEIGHT = document.documentElement.clientHeight;
+
+        var content1 = canvas1.getContext("2d");
+        canvas1.width = WIDTH;
+        canvas1.height = HEIGHT;
+
+        
+    </script>
+</html>
