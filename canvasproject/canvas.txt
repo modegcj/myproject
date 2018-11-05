@@ -17,7 +17,7 @@ Canvas创建路径的属性和方法：
 .rect() 创建矩形
 .fillRect(x,y,width,height) 绘制一个实心矩形
 .strokeRect(x,y,width,height)   绘制一个空心矩形
-.clearRect()    在给定的矩形内清除指定的像素
+.clearRect(要清除的矩形左上角的x坐标,要清除的矩形左上角的y坐标,要清除的矩形的宽度，以像素计,要清除的矩形的高度，以像素计)清空给定矩形内的指定像素。
 .arcTo()    创建两切线之间的弧/曲线
 .moveTo(x,y)   把路径移动到画布中的指定点，不创建线条
 .lineTo(x,y)   添加一个新点，然后在画布中创建从该点到最后指定点的线条
@@ -68,3 +68,10 @@ drawImage(img,sx,sy,swidth,sheight,x,y,width,height) 向画布上绘制图像、
     • height：可选。要使用的图像的高度（伸展或缩小图像）
 
 
+
+拓展：
+window.requestAnimationFrame(callback)
+window.requestAnimationFrame()方法告诉浏览器您希望执行动画并请求浏览器在下一次重绘之前调用给定的函数来更新动画。该方法
+使用一个回调函数作为参数，这个回调函数会在浏览器重绘之前调用。
+requestAnimationFrame 采用系统时间间隔，保持最佳绘制效率，不会因为间隔时间过短，造成过度绘制，增加开销；也不会因为时间间
+隔太长，使动画卡顿不流畅，让各种网页动画效果能够有一个统一的刷新机制，从而节省资源，提高系统性能，改善视觉效果。

@@ -48,12 +48,29 @@
             content.closePath();
             content.fill();
         }
+        Round_item.prototype.move = function(){
+            this.y -= 0.2;
+            if (this.y <= -10){
+                this.y = HEIGHT + 10;
+            }
+            this.draw();
+        }
+
+        function animate(){
+            content.clearRect(0,0,WIDTH,HEIGHT);
+            for(var i in round){
+                round[i].move();
+            }
+            requestAnimationFrame(animate);
+        }
         function init(){
             for(var i = 0;i < 100;i ++){
                 round[i] = new Round_item(i,Math.random() * WIDTH,Math.random() * HEIGHT);
                 round[i].draw();
             }
+            animate();
         }
         init();
+        
     </script>
 </html>
