@@ -22,6 +22,21 @@
         canvas1.width = WIDTH;
         canvas1.height = HEIGHT;
 
+        function circular(x,y){
+            this.x = x;
+            this.y = y;
+            this.r = Math.random() * 2 + 1;
+            var colorstyle = Math.random() * 360;
+            this.color = "hsl(" + colorstyle +",100%,80%)";
+        }
+        circular.prototype.draw = function(){
+            content1.beginPath();
+            content1.fillStyle = this.color;
+            content1.shadowBlur = this.r * 2;
+            content1.arc(this.x,this.y,this.r,0,Math.PI * 2,false);
+            content1.closePath();
+            content1.fill();
+        }
         
     </script>
 </html>

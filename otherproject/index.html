@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>观察者模式</title>
+    </head>
+    <body>
+        
+    </body>
+    <script>
+        let yourMsg = {};
+        yourMsg.peopleList = [];
+        yourMsg.listen = function(fn){
+            this.peopleList.push(fn);
+        }
+        yourMsg.triger = function(){
+            for(var i = 0,fn;fn = this.peopleList[i ++];){
+                fn.apply(this,arguments);
+            }
+        }
+        yourMsg.listen(function(name){
+            console.log(`${name}收到了你的消息`);
+        })
+        yourMsg.listen(function(name){
+            console.log('haha~~~');
+        })
+        yourMsg.triger('张三');
+        yourMsg.triger('李四');
+        yourMsg.triger('王五');
+        yourMsg.triger('赵六');
+    </script>
+</html>
