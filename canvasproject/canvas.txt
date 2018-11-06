@@ -11,6 +11,7 @@ Canvas创建路径的属性和方法：
 .beginPath()    起始一条路径，或重置当前路径
 .fillStyle  填充颜色
 .fill()  填充路径
+.fillText(在画布上输出的文本,开始绘制文本的x坐标,开始绘制文本的y坐标,允许的最大文本宽度（可选）)    在画布上绘制填色的文本
 .strokeStyle    描边颜色
 .stroke()   描边
 .arc(圆心x坐标,圆心y坐标,圆的半径,起始角（以弧度计，弧的圆形的三点钟位置是0°）,结束角,绘图方向为逆时针还是顺时针（可选，False=顺时针）)  创建圆弧
@@ -29,7 +30,7 @@ Canvas创建路径的属性和方法：
 .quadraticCurveTo() 创建二次方贝塞尔曲线
 .bezierCurveTo()    创建三次方贝塞尔曲线
 .isPointInPath()    如果指定的点位于当前路径中，则返回true，否则返回false
-
+.getImageData(开始复制的左上角的x坐标,开始复制的左上角的y坐标,将要复制的矩形区域的宽度,将要复制的矩形区域的高度)    返回 ImageData 对象，该对象拷贝了画布指定矩形的像素数据。
 
 Canvas设置阴影：
 .shadowColor    设置或返回用于阴影的颜色
@@ -54,6 +55,9 @@ Canvas设置渐变：
 .transform()    替换绘图的当前转换矩阵
 .setTransform() 将当前转换配置重置为单位矩阵，然后运行transform()
 
+
+canvas测量文本宽度：
+.measureText(要测量的文本)  返回包含一个对象，该对象包含以像素计的指定字体宽度。
 
 图像绘制：
 drawImage(img,sx,sy,swidth,sheight,x,y,width,height) 向画布上绘制图像、画布或视频

@@ -22,21 +22,69 @@
         canvas1.width = WIDTH;
         canvas1.height = HEIGHT;
 
-        function circular(x,y){
-            this.x = x;
-            this.y = y;
-            this.r = Math.random() * 2 + 1;
-            var colorstyle = Math.random() * 360;
-            this.color = "hsl(" + colorstyle +",100%,80%)";
+        // 先绘制出所有想要的文字的粒子，再计算它合适的尺寸
+        content1.fillStyle = "#000";
+        content1.font = 'bold 10px Arial';
+        const measure = content1.measureText(textAll); //测量文字，用来获取宽度
+        const size = 0.8;
+        // 宽高分别达到屏幕0.8时的size
+        const fSize = Math.min(HEIGHT * size * 10 / lineHeight,WIDTH * size *10 / measure.width); // 10像素字体行高 lineHeight=7 magic
+        content1.font = `bold ${fize}px Arial`;
+
+        // 根据计算后的字体大小，在将文字摆放到适合的位置，文字的坐标其实位置在左下方
+        const measureResize = content1.measureText(textAll);
+        // 文字起始位置在左下方
+        let left = (width - measureResize.width) / 2;
+        const bottom = (height + fSize / 10 * lineHeight) / 2;
+        content1.fillText(textAll,left,bottom)
+        Object.values(texts).forEach(item => {
+            content1.clearRect(0,0,width,height);
+            content1.fillText(item.text,left,bottom);
+            left += content1.measureText(item.text).width;
+            const data = content1.getImageData(0,0,width,height);
+            const points = [];
+            // 判断第i * 4 + 3位是否为0，获得相对的x,y坐标（使用时需乘画布的实际长款，y坐标也需要取反向）
+            for(let i = 0,max = data.width * data.height;i < max;i ++){
+                if(data.data[i * 4 + 3]){
+                    points.push({
+                        x: (i % data.width) / data.width,
+                        y: (i / data.width) / data.height
+                    });
+                }
+            }
+        })
+        // 保存到一个对象，用于后面的绘制
+        geometry.push({
+            color: item.hsla,
+            points
+        });
+        // hsla格式方便以后做颜色变化的扩展
+        const color1 = {h:197,s:'100%',l:'50%',a:'80%'};
+        const color2 = {h:197,s:'100%',l:'50%',a:'80%'};
+        // lifeTime帧数
+        const Actions = [
+            {lifeTime:60,text:[{text:3,hsla:color1}]},
+            {lifeTime:60,text:[{text:2,hsla:color1}]},
+            {lifeTime:60,text:[{text:1,hsla:color1}]},
+            {lifeTime:120,text:[{text:'I',hsla:color1},
+                                {text:'❤',hsla:color2},
+                                {text:'Y',hsla:color1},
+                                {text:'O',hsla:color1},
+                                {text:'U',hsla:color1}
+            ]}
+        ];
+        function draw(){
+            this.tick++;
+            if(this.tick >= this.actions[this.actionIndex].lifeTime){
+                this.nextAction();
+            };
+            this.clear();
+            this.renderParticles();//绘制点
+            this.raf = requestAnimationFrame(this.name);
         }
-        circular.prototype.draw = function(){
-            content1.beginPath();
-            content1.fillStyle = this.color;
-            content1.shadowBlur = this.r * 2;
-            content1.arc(this.x,this.y,this.r,0,Math.PI * 2,false);
-            content1.closePath();
-            content1.fill();
+        function nextAction(){
+            this.setParticle();//随机将点设置到之前得到的 action.geometry.points 上
         }
-        
+
     </script>
 </html>

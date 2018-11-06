@@ -31,8 +31,7 @@
         ctx.width = WIDTH;
         ctx.height = HEIGHT;
 
-        function Round_item(index,x,y){
-            this.index = index;
+        function Round_item(x,y){
             this.x = x;
             this.y = y;
             this.r = Math.random() * 2 + 1;
@@ -65,8 +64,7 @@
         }
         function init(){
             for(var i = 0;i < 100;i ++){
-                round[i] = new Round_item(i,Math.random() * WIDTH,Math.random() * HEIGHT);
-                round[i].draw();
+                round[i] = new Round_item(Math.random() * WIDTH,Math.random() * HEIGHT);
             }
             animate();
         }
