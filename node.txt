@@ -1,0 +1,120 @@
+﻿node模块：
+引入模块 var 变量名 = require('模块名');
+1.http模块：
+    http.createServer(function(req,res){
+        res.writeHead(200,{'Content-Type':'text/plain'});
+        res.end('Hello World');
+    })（创建服务器）.listen(8080,127.0.0.1)（监听端口）
+
+2.fs模块
+    打开文件
+    fs.open(path,flags[,mode],callback)
+    • path  文件路径
+    • flags 要打开的文件的行为
+    • mode  设置文件模式，前提是在创建改文件，默认为0666，读取和写入
+    • callback  回调函数得到两个参数(err,fd)
+    flags >
+        r   打开文件进行读取
+        r+  打开文件进行读取和写入
+        rs  打开文件，用于读取在同步方式
+        rs+ 打开文件进行写入
+        w   打开文件进行写入，文件不存在则创建，文件存在则截断
+        wx  类似'w'，路径存在则失败
+        w+  打开文件进行读取和写入，文件不存在则创建，文件存在则截断
+        wx+ 类似'w+'，路径存在则失败
+        a   打开文件进行追加，文件不存在则创建
+        ax  类似'a'，路径存在则失败
+        a+  打开文件进行读取和追加，文件不存在则创建
+        ax+ 类似'a+'，路径存在则失败
+    读取文件
+    fs.readFile("路径",function(err,data){})
+    fs.read(fd,buffer,offset,length,position,callback)
+    • fd    这是通过文件fs.open()方法返回的文件描述符
+    • buffer    这是该数据将被写入到缓冲器
+    • offset    这是偏移量在缓冲器开始写入出
+    • length    指定要读取的字节的数目
+    • position  整数，指定从文件中开始读取，如果位置为null，数据将从当前文件位置读取
+    • callback  回调函数
+    获取一个文件有关的信息的方法
+    fs.stat(path,callback)
+    写入文件
+    fs.writeFile(path,data[,options],callback)
+    • path  文件名
+    • data  将被写入到文件中的字符串或缓存
+    • options   一个对象，它将于{编码,模式,标志}。默认编码是UTF8，模式是八进制066和标志'w'
+    • callback  回调函数
+    关闭文件
+    fs.close(fd,callback)
+    截断文件
+    fs.ftruncate(fd,len,callback)
+    删除文件
+    fs.unlink(path,callback)
+    创建目录
+    fs.mkdir(path[,mode],callback)
+    读取目录
+    fs.readdir(path,callback)
+    删除目录
+    fs.rmdir(path,callback)
+
+3.event模块
+    var eventEmitter = new events.eventEmitter();
+
+    eventEmitter的方法总结：
+    绑定事件
+    eventEmitter.on('事件名',事件处理函数);
+    触发事件
+    eventEmitter.emit('事件名');
+    添加一个监听器
+    eventEmitter.addListener('事件名',事件处理函数)
+    增加一次监听事件
+    eventEmitter.once('事件名',事件处理函数)
+    删除监听器
+    eventEmitter.removeListener('事件名',事件处理函数)
+    删除所有监听器
+    eventEmitter.removeAllListeners([事件名])
+    返回监听器为指定事件的数组
+    eventEmitter.listeners(事件名)
+
+    eventEmitter的类方法：
+    返回对于一个给定的事件监听器的数量
+    eventEmitter.listenerCount(发射器,事件名)
+
+4.缓冲器
+    Buffer代表一个缓冲区，主要用于操作二进制数据流，用法和数组有些相似
+    var buf = new Buffer(size/array/(str,[encoding])/buffer)
+    Buffer对象的方法：
+    buf.write(string[,offset][,length][,encoding])  //往Buffer对象中写入数据
+    buf.write用来向缓冲区中写入一个字符串，返回实际写入的字节数
+    • string 待写入的字符串对象
+    • offset 缓冲区偏移量，指定的话就从这个位置开始写入，不指定就默认为0
+    • length 要写入的字节数
+    • encoding 待写入字符串的编码格式，默认为utf8
+    buf.toString([encoding][,start][,end])  //根据encoding参数(默认是'utf8')返回一个解码的string类型
+    buf.toJSON()    //返回一个JSON表示的Buffer实例。JSON.stringify将会默认调用来字符串序列化这个Buffer实例
+    buf.slice([start][,end])    //返回一个新的buffer，这个buffer将会和老的buffer引用相同的内存地址，改变原来的buffer
+    buf.copy(targetBuffer[,targetStart][,sourceStart][,shourceEnd]) //进行buffer的拷贝
+    buf.concat(list[,totalLength])  //连接Node缓存到单个节点缓存，返回一个缓冲区实例
+    • list 要连接缓冲区的数组对象列表
+    • totalLength 这是缓冲器连接在一起时的总长度
+    buf.compare(otherBuffer)    //比较两个Node缓冲器，返回一个数字，表示否到来之前或之后或和otherBuffer排序顺序一样
+    buf.fill(value[,offset][,end])  //填充指定值的缓冲区，如果只有一个参数则它填满整个缓冲区
+
+5.Node.js流
+流是可以从一个源读取或写入数据到连续的目标对象。在Node.js中有四种类型的数据流
+    • Readable  用于读操作
+    • Writable  用于写操作
+    • Duplex    用于读取和写入操作
+    • Transform 输出基于输入的地方进行计算的一种双向流
+每种类型的流是一个EventEmitter实例，并抛出的时代不同的实例几个事件，一些常用的事件是：
+    • data  当有数据可读取此事件
+    • end   当没有更多的数据读取此事件被触发
+    • error 当有任何错误或接受数据写入此事件
+    • finish    当所有数据已刷新到底层系统触发此事件
+
+6.Node.js的全局对象
+__firename：表示正在执行的代码的文件名
+__dirname：表示当前正在执行的脚本所在目录的名称
+setTimeout(callback,ms)定时器
+clearTimeout()清除定时器
+setInterval(callback,ms)计时器
+clearInterval()清除计时器
