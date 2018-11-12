@@ -118,3 +118,37 @@ setTimeout(callback,ms)定时器
 clearTimeout()清除定时器
 setInterval(callback,ms)计时器
 clearInterval()清除计时器
+
+7.Node.js工具模块
+OS Module   提供基本的操作系统相关的实用功能
+Path Module 提供工具，用于处理和转换文件的路径
+Net Module  提供服务器和客户端的数据流，充当网络包装
+DNS Module  提供做实际DNS查询的功能，以及使用底层操作系统的名词解析功能
+Domain Module   提供一个方式来处理多个不同的I/O操作，作为一个组
+
+
+8.Node.js规范化应用
+Node提供child_process模块，该模块具有以下三个主要的方法来创建子进程
+    • exec  -child_process.exec方法在shell控制台运行一个命令并缓冲输出
+    • apawn -child_process.spawn启动一个新的进程，一个给定的指令
+    • fork  -child_process.fork方法是指定spawn()来创建子进程的一个特例
+exec()方法在shell运行一个命令并缓冲输出
+child_process.exec(command[,options],callback)
+    • command   字符串运行的命令
+    • options   对象可包括以下一个或多个选项
+        • cwd   子进程的字符串当前工作目录
+        • env   对象环境的键值对
+        • encoding  字符串(缺省："UTF8")
+        • shell 字符串执行
+        • timeout   数字(默认：0)
+        • maxBuffer 数字(默认:200*1024)
+        • killSignal    字符串(默认：'SIGTERM')
+        • uid   数字用于设置过程的用户的身份
+        • gid   数字设置进程的组标识
+    • callback  回调函数
+spawn()方法启动使用给定命令一个新的进程
+child_process.spawn(command[,args][,options])
+    • args  字符串参数数组列表
+fork()方法是spawn()来创建节点的过程的一个特例
+child_process.fork(modulePath[,args][,options])
+    • modulePath    字符串-改模块在运行子进程
