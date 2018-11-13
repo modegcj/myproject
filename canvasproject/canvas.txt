@@ -1,6 +1,6 @@
 ﻿canvas使用（MDN文档）：
 1.获取canvas上下文类型：
-obj.getContext(contextType,contextAttributes);
+canvas.getContext(contextType,contextAttributes);
 • 上下文类型(contextType)：
     。2d：代表一个二维渲染上下文
     。webgl(或“experimental-webgl”)：代表一个三维渲染上下文
@@ -55,6 +55,8 @@ Canvas设置渐变：
 .transform()    替换绘图的当前转换矩阵
 .setTransform() 将当前转换配置重置为单位矩阵，然后运行transform()
 
+.save() 把当前状态的一份拷贝压入到一个保存图像状态的栈中，即临时改变图像状态
+.restore()  恢复以前的值
 
 canvas测量文本宽度：
 .measureText(要测量的文本)  返回包含一个对象，该对象包含以像素计的指定字体宽度。
