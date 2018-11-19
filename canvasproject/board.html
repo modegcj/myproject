@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>canvas画板</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+    </body>
+    <script>
+        function Pixel(option){
+            this.x = option.x;
+            this.y = option.y;
+            this.shape = option.shape;
+            this.size = option.size || 8;
+            var createPath = function(ctx){
+                if(this.shape === circle){
+                    this.createCircle(ctx);
+                }else if(ths.shacpe === rect){
+                    this.vreateEct('rect')
+                } else {
+                    this.createCircle(ctx);
+                }
+            };
+            var draw = function(ctx){
+                
+            }
+        }
+        
+    </script>
+</html>
